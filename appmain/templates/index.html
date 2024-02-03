@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <title>pyBook</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row navbar bg-light align-items-center">
+            <div class="col-6">
+                <a class="nav-link" href="/home"><h4>pyBook</h4></a>
+            </div>
+            <div class="col-6">
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link" id="signup_link" href="/signup">SignUp</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="signin_link" href="/signin">SignIn</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="signout_link" href="/signout">SignOut</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="myinfo_link" href="/myinfo">MyInfo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="create_article_link" href="/create_article">상품 등록</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col" style="text-align: center">contents</div>
+        </div>
+    </div>
+</body>
+<script>
+const signup = document.querySelector("#signup_link");
+const signin = document.querySelector("#signin_link");
+const signout = document.querySelector("#signout_link");
+const myinfo = document.querySelector("#myinfo_link");
+
+function showAndHideNavBanMenu() {
+    let authtoken = window.sessionStorage.getItem("authtoken");
+
+    if(authtoken){
+        signup.style.display = "none";
+        signin.style.display = "none";
+    }
+    else{
+        signout.style.display = "none";
+        myinfo.style.display = "none";
+    }
+}
+
+window.addEventListener("load", showAndHideNavBanMenu);
+
+function signOutHandler() {
+    window.sessionStorage.removeItem("authtoken");
+    window.sessionStorage.removeItem("username");
+
+    let url = "/home";
+    window.location.replace(url);
+}
+
+signout.addEventListener("click", signOutHandler);
+
+</script>
+</html>
