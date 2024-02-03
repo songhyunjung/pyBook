@@ -72,6 +72,34 @@ def createArticle():
 
     return make_response(jsonify(payload), 200)
 
+@article.route('/api/article/recent', methods=['GET'])
+def getRecentArticles():
+
+    payload = {"success": False}
+
+    conn = sqlite3.connect('pyBook.db')
+    cursor = conn.cursor()
+
+    if cursor:
+        SQL = 'SELECT articleNo, author, title, category, description, price, picture \
+               FROM articles ORDER BY articleNo DESC LIMIT 6'
+        cursor.execute(SQL)
+        result = cursor.fetchall()
+
+        cursor.close()
+    conn.close()
+
+    recentArticleDics = []
+
+    if len(result) > 0:
+        for article in result:
+            recentArticleDics.append({"articleNo": article[0], "title": article[2],
+                                      "desc": article[4]})
+
+        payload = {"success": True, "articles": recentArticleDics}
+
+    return make_response(jsonify(payload), 200)
+
 
 
 
