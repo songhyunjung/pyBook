@@ -4,7 +4,7 @@ const signout = document.querySelector("#signout_link");
 const myinfo = document.querySelector("#myinfo_link");
 const createArticleLink = document.querySelector("#create_article_link");
 
-function showAndHideNavBanMenu() {
+function showAndHideNavbarMenu() {
     let authtoken = window.sessionStorage.getItem("authtoken");
 
     if(authtoken){
@@ -18,7 +18,7 @@ function showAndHideNavBanMenu() {
     }
 }
 
-window.addEventListener("load", showAndHideNavBanMenu);
+window.addEventListener("load", showAndHideNavbarMenu);
 
 function signOutHandler() {
     window.sessionStorage.removeItem("authtoken");
