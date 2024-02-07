@@ -39,11 +39,11 @@ def register():
         for row in rows:
             print(row)
 
-            cursor.close()
-        conn.close()
+        cursor.close()
+    conn.close()
 
-        payload = {"success": True}
-        return make_response(jsonify(payload), 200)
+    payload = {"success": True}
+    return make_response(jsonify(payload), 200)
 
 @user.route('/signin')
 def signIn():
