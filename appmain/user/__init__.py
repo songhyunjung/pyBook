@@ -4,8 +4,7 @@ conn = sqlite3.connect('pyBook.db')
 
 cursor = conn.cursor()
 
-SQL = 'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, ' \
-      'username TEXT NOT NULL, email TEXT NOT NULL, passwd TEXT NOT NULL, authkey TEXT)'
+SQL = 'CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, email TEXT NOT NULL, passwd TEXT NOT NULL, authkey TEXT)'
 
 cursor.execute(SQL)
 
