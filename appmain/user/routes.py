@@ -81,7 +81,7 @@ def getAuth():
             conn.commit()
 
             token = jwt.encode({"id": id, "email": email, "username": username,
-                                "authkey": authkey,}, app.config["SECRET_KEY"], algorithm= 'HS256')
+                                "authkey": authkey,}, app.config["SECRET_KEY"], algorithm='HS256')
             payload = {"authenticated": True, "email": email, "username": username,
                        "authtoken": token}
 
@@ -144,33 +144,37 @@ def updateMyInfo():
 
     if authToken:
         isValid = verifyJWT(authToken)
-        email = token["email"]
 
-        hashedPW = bcrypt.hashpw(passwd.encode('utf-8'), bcrypt.gensalt())
+        if isValid:
+            token = getJWTContent(authToken)
+            email = token["email"]
 
-        conn = sqlite3.connect('pyBook.db')
-        cursor = conn.cursor()
+            hashedPW = bcrypt.hashpw(passwd.encode('utf-8'), bcrypt.gensalt())
 
-        if cursor:
-            if passwd:
-                SQL = 'UPDATE users SET username=?, passwd=? WHERE email=?'
-                cursor.execute(SQL, (username, hashedPW, email))
-            else:
-                SQL = 'UPDATE users SET username=? WHERE email=?'
-                cursor.execute(SQL, (username, email))
-            conn.commit()
+            conn = sqlite3.connect('pyBook.db')
+            cursor = conn.cursor()
 
-            #SQL = 'SELECT * FROM users'
-            #cursor.execute(SQL)
-            #rows = cursor.fetchall()
-            #for row in rows:
-            #   print(row)
+            if cursor:
+                if passwd:
+                    SQL = 'UPDATE users SET username=?, passwd=? WHERE email=?'
+                    cursor.execute(SQL, (username, hashedPW, email))
+                else:
+                    SQL = 'UPDATE users SET username=? WHERE email=?'
+                    cursor.execute(SQL, (username, email))
+                conn.commit()
 
-            cursor.close()
-        conn.close()
+                #SQL = 'SELECT * FROM users'
+                #cursor.execute(SQL)
+                #rows = cursor.fetchall()
+                #for row in rows:
+                #   print(row)
+
+                cursor.close()
+            conn.close()
 
     else:
         pass
+
     return make_response(jsonify(payload), 200)
 
 @user.route('/resetpw')
