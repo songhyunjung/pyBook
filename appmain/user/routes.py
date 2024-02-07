@@ -81,7 +81,7 @@ def getAuth():
             conn.commit()
 
             token = jwt.encode({"id": id, "email": email, "username": username,
-                                "authkey": authkey,}, app.config["SECRET_KEY"], algorithm='HS256')
+                                "authkey": authkey}, app.config["SECRET_KEY"], algorithm='HS256')
             payload = {"authenticated": True, "email": email, "username": username,
                        "authtoken": token}
 
