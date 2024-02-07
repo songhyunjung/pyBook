@@ -71,7 +71,7 @@
         }
     }
 
-    window.addEventListener("load", showAndHideNavBanMenu);
+    window.addEventListener('load', showAndHideNavBanMenu);
 
     function signOutHandler() {
         window.sessionStorage.removeItem("authtoken");
@@ -81,7 +81,7 @@
         window.location.replace(url);
     }
 
-    signout.addEventListener("click", signOutHandler);
+    signout.addEventListener('click', signOutHandler);
 
     function displayRecentArticles(articles) {
         articles.forEach((article) => {

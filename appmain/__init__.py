@@ -1,7 +1,7 @@
-from flask import Flask
+import flask
 from flask_mail import Mail
 
-app = Flask(__name__)
+app = flask.Flask(__name__)
 
 app.config["SECRET_KEY"] = '99a2726256c1239da4dfe613e0dbf61a'
 
