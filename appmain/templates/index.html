@@ -114,7 +114,7 @@
     window.addEventListener('load', getRecentArticles);
 
     function getRecentArticles() {
-        fetch('/api/article/recent' {
+        fetch('/api/article/recent', {
                 method: 'GET'
             }).then((response) => {
                 return response.json();

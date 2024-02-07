@@ -70,7 +70,7 @@
         formData.set("email", email.value);
         formData.set("passwd", passwd.value);
 
-        fetch('/api/user/signin' {
+        fetch('/api/user/signin', {
             method: 'POST',
             body: formData
         }).then((response) => {
