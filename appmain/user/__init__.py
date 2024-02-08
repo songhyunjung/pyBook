@@ -1,6 +1,7 @@
 import sqlite3
+from sqlite3 import Connection
 
-conn = sqlite3.connect('pyBook.db')
+conn: Connection = sqlite3.connect('pyBook.db')
 
 cursor = conn.cursor()
 

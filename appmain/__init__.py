@@ -16,8 +16,8 @@ mail = Mail(app)
 from appmain.routes import main
 app.register_blueprint(main)
 
-from appmain.user.routes import user
-app.register_blueprint(user)
+import appmain.user.routes
+app.register_blueprint(appmain.user.routes.user)
 
 from appmain.article.routes import article
 app.register_blueprint(article)
