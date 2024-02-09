@@ -240,6 +240,39 @@
 
     leaveReplyButton.addEventListener('click', onLeaveReplyHandler);
 
+    function onDeleteReplyHandler(event) {
+        const replyNo = event.currentTarget.dataset.replyno;
+
+        let headerData = new Headers();
+        const authToken = sessionStorage.getItem("authtoken");
+        if(authtoken){
+            headerData.set("authtoken", authToken)
+        }
+
+        let formData = new FormData();
+
+        formData.set("replyNo", replyNo);
+
+        fetch('/api/reply/delete',{
+            method: 'POST',
+            headers: headerData,
+            body: formData
+        }).then((response) => {
+            return response.json();
+        }).then((resBody) => {
+            if(resBody["success"] === true){
+                console.log('onDeleteReplyHandler():', replyNo);
+
+                const targetReplyRowId = `#reply_row-${replyNo}`;
+                const targetReplyRow = document.querySelector(targetReplyRowId);
+                targetReplyRow.remove();
+                baseIndex = baseIndex - 1;
+            }
+        }).catch((error) => {
+            console.log('[Error]onDeleteReplyHandler():', error);
+        });
+    }
+
 </script>
 </html>
 
