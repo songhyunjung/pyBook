@@ -89,6 +89,37 @@ def getReply():
 
     return make_response(jsonify(payload), 200)
 
+@reply.route('/api/reply/delete', methods=['POST'])
+def deleteReply():
+    headerData = request.headers
+    data = request.form
+
+    authToken = headerData.get("authtoken")
+
+    payload = {"success": False}
+
+    if authToken:
+        isvalid = verifyJWT(authToken)
+
+        if isvalid:
+            replyNo = data.get("replyNo")
+
+            conn = sqlite3.connect('pyBook.db')
+            cursor = conn.cursor()
+
+            if cursor:
+                SQL = 'DELETE FROM replies WHERE replyNo=?'
+                cursor.execute(SQL, (replyNo,))
+                conn.commit()
+
+            payload = {"success": True}
+        else:
+            pass
+    else:
+        pass
+
+    return make_response(jsonify(payload), 200)
+
 
 
 
