@@ -1,4 +1,4 @@
-- ## 세부 기능
+## 세부 기능
 
 - 회원 가입
 - 로그인, 로그아웃
@@ -11,10 +11,8 @@
 - 상품 검색
 - 댓글 생성, 삭제
 
-- ## 사용된 기술
+## 사용된 기술
 
-frontend: html, css, bootstrap, javascript
-
-backend: python, flask web server
-
-database: SQLite
+- frontend: html, css, bootstrap, javascript
+- backend: python, flask web server
+- database: SQLite
